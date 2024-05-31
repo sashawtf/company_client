@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+
+<body>
+<div class="form-container">
+    <form th:action="@{/registration}" method="post" th:object="${user}">
+
+        <div th:if="${param.success}">
+            <div class="alert alert-info">Вы успешно зарегистрировались!</div>
+        </div>
+        <div th:if="${param.email_invalid}">
+            <div class="alert alert-danger">Имя уже существует!</div>
+        </div>
+        <h1>Регистрация</h1>
+
+        <div class="role-selection">
+            <div class="role-option">
+                <input type="radio" id="role_user" name="role" value="ROLE_USER" th:field="*{role}" required />
+                <label for="role_user">Пользователь</label>
+            </div>
+            <div class="role-option">
+                <input type="radio" id="role_admin" name="role" value="ROLE_ADMIN" th:field="*{role}" required />
+                <label for="role_admin">Администратор</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="userName">Имя</label>
+            <input id="userName" class="form-control" th:field="*{userName}" required autofocus="autofocus" />
+            <span class="validationError" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Имя</span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="fullName">Полное имя</label>
+            <input id="fullName" class="form-control" th:field="*{fullName}" required autofocus="autofocus" />
+            <span class="validationError" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Полное имя</span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="password">Пароль</label>
+            <input id="password" class="form-control" type="password" th:field="*{password}" required autofocus="autofocus"/>
+            <span class="validationError" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            <span>   <a href="/" th:href="@{/login}">Войти</a></span>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>

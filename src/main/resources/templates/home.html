@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Информационная подсистема учета клиентов компании</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<div class="header-vertical">
+    <a href="/" class="home-link">
+        <img src="/image/icons8-клиенты-64.png">
+    </a>
+    <div class="main-buttons-vertical">
+    <a href="/person/all">Клиенты</a>
+    <a href="/email/all">Адреса электронной почты</a>
+    <a href="/phone/all">Телефоны</a>
+    <a href="/status/all">Статусы</a>
+        <a href="/veriety/all">Виды клиентов</a>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="title">Добро пожаловать!</div>
+    <a href="/login" class="login-button" sec:authorize="!isAuthenticated()">Войти</a>
+    <a href="javascript: document.logoutForm.submit()" class="exit" sec:authorize="isAuthenticated()">Выйти</a>
+    <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true" sec:authorize="isAuthenticated()">
+        <input hidden type="submit" value="Sign Out" />
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    </form>
+</div>
+</body>
+</html>
+
+
+

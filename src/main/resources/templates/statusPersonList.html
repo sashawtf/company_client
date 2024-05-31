@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все статусы клиентов</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="/" class="home-link">
+            <img src="/image/icons8-клиенты-64.png">
+        </a>
+    </div>
+    <div class="main-content-two">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Статус клиента</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="status : ${statuses}">
+                <td th:text="${status.id}"></td>
+                <td th:text="${status.status}"></td>
+                <td>
+                    <a th:href="@{/status/edit/{id}(id=${status.id})}" class="icon-button">
+                        <img src="/image/редакт.png" alt="Редактировать">
+                    </a>
+                    <a th:href="@{/status/delete/{id}(id=${status.id})}" class="icon-button">
+                        <img src="/image/удалить.png" alt="Удалить">
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p><a th:href="@{/status/create}" class="add-button">Добавить новый статус клиента</a></p>
+        <div class="popup-message" id="popup-message" th:if="${error}">
+            <p th:text="${error}"></p>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var popup = document.getElementById("popup-message");
+        if (popup) {
+            popup.classList.add("show");
+            setTimeout(function() {
+                popup.classList.remove("show");
+            }, 3000);
+        }
+    });
+</script>
+</html>

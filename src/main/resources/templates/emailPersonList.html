@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все Email</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="/" class="home-link">
+            <img src="/image/icons8-клиенты-64.png">
+        </a>
+    </div>
+    <div class="main-content-two">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Клиент ID</th>
+                <th>Email</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="email : ${emails}">
+                <td th:text="${email.id}"></td>
+                <td th:text="${email.personId}"></td>
+                <td th:text="${email.email}"></td>
+                <td>
+                    <a th:href="@{/email/edit/{id}(id=${email.id})}" class="icon-button">
+                        <img src="/image/редакт.png" alt="Редактировать">
+                    </a>
+                    <a th:href="@{/email/delete/{id}(id=${email.id})}" class="icon-button">
+                        <img src="/image/удалить.png" alt="Удалить">
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p><a th:href="@{/email/create}" class="add-button">Добавить новый Email</a></p>
+        <div class="popup-message" id="popup-message" th:if="${error}">
+            <p th:text="${error}"></p>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var popup = document.getElementById("popup-message");
+        if (popup) {
+            popup.classList.add("show");
+            setTimeout(function() {
+                popup.classList.remove("show");
+            }, 3000);
+        }
+    });
+</script>
+</html>

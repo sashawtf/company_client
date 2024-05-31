@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать вид клиента</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="/" class="home-link">
+            <img src="/image/icons8-клиенты-64.png">
+        </a>
+    </div>
+    <div class="main-content-two">
+        <form th:action="@{/veriety/update/{id}(id=${verietyPerson.id})}" th:object="${verietyPerson}" method="post" class="form">
+            <div class="form-group">
+                <label for="veriety">Вид клиента:</label>
+                <input type="text" id="veriety" th:field="*{veriety}" class="input-field" />
+                <span class="error-message" th:if="${#fields.hasErrors('veriety')}" th:errors="*{veriety}">Поле не должно быть пустым</span><br>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="submit-button">Сохранить</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
