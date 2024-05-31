@@ -23,9 +23,7 @@ public class EmailPersonRepositoryTest {
         emailPerson.setPersonId(1L);
         emailPerson.setEmail("test@example.com");
         emailPersonRepository.save(emailPerson);
-
         assertTrue(emailPersonRepository.existsByPersonId(1L));
-
         assertFalse(emailPersonRepository.existsByPersonId(999L));
     }
 }
